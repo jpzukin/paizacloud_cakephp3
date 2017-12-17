@@ -19,7 +19,7 @@ app_name='my_app_name'
 pkg_list=""
 (dpkg -l php7.0-intl | grep ^ii) || pkg_list="${pkg_list} php7.0-intl"
 (dpkg -l php7.0-zip  | grep ^ii) || pkg_list="${pkg_list} php7.0-zip"
-if [ "${pkg_list}" -ne "" ]; then
+if [ "${pkg_list}" != "" ]; then
 	sudo sh <<-EOS
 		apt-get update
 		apt-get upgrade
