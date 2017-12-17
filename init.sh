@@ -8,8 +8,8 @@ cd ${shell_dir}
 #   - Database username
 #   - Database password
 #   - Application name
-db_name='my_app'
-db_user='my_app'
+db_name='new_my_app'
+db_user='new_my_app'
 db_pass='Pa$$word'
 app_name='my_app_name'
 
@@ -64,7 +64,7 @@ fi
 # Database configuration setting
 if [ -d ~/public_html/${app_name} ]; then
 	cd ~/public_html/${app_name}
-	sed -i -E "s/(passwrod.+)secret/\1${db_pass}/" config/app.php
+	sed -i -E "s/(password.+)secret/\1${db_pass}/" config/app.php
 	sed -i -E "s/(database.+)my_app/\1${db_name}/" config/app.php
 	sed -i -E "s/(username.+)my_app/\1${db_user}/" config/app.php
 fi
