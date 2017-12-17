@@ -8,9 +8,9 @@ cd ${shell_dir}
 #   - Database username
 #   - Database password
 #   - Application name
-database_name='my_app'
-database_user='my_app'
-database_pass='Pa$$word'
+db_name='my_app'
+db_user='my_app'
+db_pass='Pa$$word'
 app_name='my_app_name'
 
 # Install a PHP Extention:
@@ -37,8 +37,8 @@ fi
 # Creating the Database
 if [ ! -f database.sql ]; then
 	cat <<-EOS > database.sql
-		CREATE DATABASE IF NOT EXISTS ${database_name} DEFAULT CHARACTER SET utf8;
-		GRANT ALL ON ${database_name}.* TO ${database_user}@localhost IDENTIFIED BY ${database_pass}
+		CREATE DATABASE IF NOT EXISTS ${db_name} DEFAULT CHARACTER SET utf8;
+		GRANT ALL ON ${db_name}.* TO ${db_user}@localhost IDENTIFIED BY '${db_pass}'
 	EOS
 	mysql -u root < database.sql
 fi
@@ -51,21 +51,20 @@ if [ ! -f /etc/apache2/conf-available/fqdn.conf ]; then
 		echo ServerName $(hostname).paiza-user.cloud > /etc/apache2/conf-available/fqdn.conf
 		a2enconf fqdn.conf
 		a2enmod rewrite
-		service apache2 restart-
+		service apache2 restart
 	EOS
 fi
 
 # Getting CakePHP
 cd ~/public_html
 
-if [ ! -d ${application_name} ]; then
-	composer create-project --prefer-dist ${application_name} --no-progress --profile
-	sed -i -e "s/secret/${password}/" ${application_name}
+if [ ! -d ${app_name} ]; then
+	composer create-project --prefer-dist ${app_name} --no-progress --profile
 fi
 
 # Database configuration setting
-if [ -d ${application_name} ]; then
-	sed -i -e "s/(passwrod.+)secret/\1${database_pass}/" config/app.php
-	sed -i -e "s/(database.+)my_app/\1${database_name}/" config/app.php
-	sed -i -e "s/(username.+)my_app/\1${database_user}/" config/app.php
+if [ -d ${app_name} ]; then
+	sed -i -e "s/(passwrod.+)secret/\1${db_pass}/" config/app.php
+	sed -i -e "s/(database.+)my_app/\1${db_name}/" config/app.php
+	sed -i -e "s/(username.+)my_app/\1${db_user}/" config/app.php
 fi
