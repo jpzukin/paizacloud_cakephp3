@@ -64,7 +64,7 @@ fi
 
 # Database configuration setting
 if [ -d ${app_name} ]; then
-	sed -i -e "s/(passwrod.+)secret/\1${db_pass}/" config/app.php
-	sed -i -e "s/(database.+)my_app/\1${db_name}/" config/app.php
-	sed -i -e "s/(username.+)my_app/\1${db_user}/" config/app.php
+	sed -i -E "s/(passwrod.+)secret/\1${db_pass}/" config/app.php
+	sed -i -E "s/(database.+)my_app/\1${db_name}/" config/app.php
+	sed -i -E "s/(username.+)my_app/\1${db_user}/" config/app.php
 fi
