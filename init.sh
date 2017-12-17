@@ -8,8 +8,8 @@ cd ${shell_dir}
 #   - Database username
 #   - Database password
 #   - Application name
-db_name='new_my_app'
-db_user='new_my_app'
+db_name='my_app'
+db_user='my_app'
 db_pass='Pa$$word'
 app_name='my_app_name'
 
@@ -29,8 +29,7 @@ fi
 
 # Install a Composer plugin:
 #  - hirak/prestissimo - composer parallel install plugin.
-composer global show | grep "hirak/prestissimo"
-if [ $? -eq 1 ]; then
+if [ ! -d ~/.composer/vendor/hirak/prestissimo ]; then
 	composer global require "hirak/prestissimo"
 fi
 
