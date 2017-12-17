@@ -10,7 +10,7 @@ cd ${shell_dir}
 #   - Application name
 db_name='my_app'
 db_user='my_app'
-db_pass='Pa$$word'
+db_pass='Pa$$w0rd'
 app_name='my_app_name'
 
 # Install a PHP Extention:
