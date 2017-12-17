@@ -37,7 +37,7 @@ fi
 # Creating the Database
 if [ ! -f database.sql ]; then
 	cat <<-EOS > database.sql
-		CREATE DATABASE ${database_name} IF NOT EXISTS DEFAULT CHARACTER SET utf8;
+		CREATE DATABASE IF NOT EXISTS ${database_name} DEFAULT CHARACTER SET utf8;
 		GRANT ALL ON ${database_name}.* TO ${database_user}@localhost IDENTIFIED BY ${database_pass}
 	EOS
 	mysql -u root < database.sql
