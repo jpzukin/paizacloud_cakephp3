@@ -59,7 +59,7 @@ fi
 cd ~/public_html
 
 if [ ! -d ${app_name} ]; then
-	composer create-project --prefer-dist ${app_name} --no-progress --profile
+	composer create-project --prefer-dist cakephp/app ${app_name} --no-progress --profile
 fi
 
 # Database configuration setting
