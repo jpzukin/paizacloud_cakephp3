@@ -47,4 +47,12 @@ fi
 if [ ! -d ${application_name} ]; then
 	cd ~/public_html
 	composer create-project --prefer-dist ${application_name} --no-progress --profile
+	sed -i -e "s/secret/${password}/" ${application_name}
+fi
+
+# Database configuration setting
+if [ -d ${application_name} ]; then
+	sed -i -e "s/(passwrod.+)secret/\1${database_pass}/" config/app.php
+	sed -i -e "s/(database.+)my_app/\1${database_name}/" config/app.php
+	sed -i -e "s/(username.+)my_app/\1${database_user}/" config/app.php
 fi
