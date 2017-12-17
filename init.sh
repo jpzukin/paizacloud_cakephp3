@@ -8,17 +8,17 @@ cd ${shell_dir}
 #   - Database username
 #   - Database password
 #   - Application name
-$database_name='my_app'
-$database_user='my_app'
-$database_pass='Pa$$word'
-$app_name='my_app_name'
+database_name='my_app'
+database_user='my_app'
+database_pass='Pa$$word'
+app_name='my_app_name'
 
 # Install a PHP Extention:
 #   - intl PHP Extention
 #   - zip PHP Extention
-$pkg_list=""
-(dpkg -l php7.0-intl | grep ^ii) || $pkg_list="${pkg_list} php7.0-intl"
-(dpkg -l php7.0-zip  | grep ^ii) || $pkg_list="${pkg_list} php7.0-zip"
+pkg_list=""
+(dpkg -l php7.0-intl | grep ^ii) || pkg_list="${pkg_list} php7.0-intl"
+(dpkg -l php7.0-zip  | grep ^ii) || pkg_list="${pkg_list} php7.0-zip"
 if [ "${pkg_list}" -ne "" ]; then
 	sudo sh <<-EOS
 		apt-get update
