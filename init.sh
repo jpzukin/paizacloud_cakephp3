@@ -27,6 +27,18 @@ if [ "${pkg_list}" != "" ]; then
 	EOS
 fi
 
+# Setting a Apache httpd Module/conf:
+#   - rewrite module
+#   - fqdn conf
+if [ ! -f /etc/apache2/conf-available/fqdn.conf ]; then
+	sudo sh <<-EOS
+		echo ServerName $(hostname).paiza-user.cloud > /etc/apache2/conf-available/fqdn.conf
+		a2enconf fqdn.conf
+		a2enmod rewrite
+		service apache2 restart
+	EOS
+fi
+
 # Install a Composer plugin:
 #  - hirak/prestissimo - composer parallel install plugin.
 if [ ! -d ~/.composer/vendor/hirak/prestissimo ]; then
@@ -42,25 +54,14 @@ if [ ! -f database.sql ]; then
 	mysql -u root < database.sql
 fi
 
-# Setting a Apache httpd Module/conf:
-#   - rewrite module
-#   - fqdn module
-if [ ! -f /etc/apache2/conf-available/fqdn.conf ]; then
-	sudo sh <<-EOS
-		echo ServerName $(hostname).paiza-user.cloud > /etc/apache2/conf-available/fqdn.conf
-		a2enconf fqdn.conf
-		a2enmod rewrite
-		service apache2 restart
-	EOS
-fi
-
 # Getting CakePHP
 if [ ! -d ~/public_html/${app_name} ]; then
+	echo "Getting CakePHP..."
 	cd ~/public_html
 	composer create-project --prefer-dist cakephp/app ${app_name} --no-progress --profile
 fi
 
-# Database configuration setting
+# Database Configuration
 if [ -d ~/public_html/${app_name} ]; then
 	cd ~/public_html/${app_name}
 	sed -i -E "s/(password.+)secret/\1${db_pass}/" config/app.php
