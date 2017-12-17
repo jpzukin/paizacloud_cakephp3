@@ -56,14 +56,14 @@ if [ ! -f /etc/apache2/conf-available/fqdn.conf ]; then
 fi
 
 # Getting CakePHP
-cd ~/public_html
-
-if [ ! -d ${app_name} ]; then
+if [ ! -d ~/public_html/${app_name} ]; then
+	cd ~/public_html
 	composer create-project --prefer-dist cakephp/app ${app_name} --no-progress --profile
 fi
 
 # Database configuration setting
-if [ -d ${app_name} ]; then
+if [ -d ~/public_html/${app_name} ]; then
+	cd ~/public_html/${app_name}
 	sed -i -E "s/(passwrod.+)secret/\1${db_pass}/" config/app.php
 	sed -i -E "s/(database.+)my_app/\1${db_name}/" config/app.php
 	sed -i -E "s/(username.+)my_app/\1${db_user}/" config/app.php
