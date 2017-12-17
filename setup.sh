@@ -56,5 +56,5 @@ fi
 # CakePHP3のデータベース接続情報を変更する
 # - passwordの変更
 if [ -f ~/public_html/my_app_name/config/app.php ]; then
-  sed -i -e 's/secret/Pa$$w0rd/1' ~/public_html/my_app_name/config/app.php
+  sed -i -e 's/secret/Pa$$w0rd/' ~/public_html/my_app_name/config/app.php
 fi
