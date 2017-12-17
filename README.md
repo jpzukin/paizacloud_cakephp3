@@ -20,7 +20,7 @@ init.shの先頭でシェル変数として定義されている値を変更し�
 ```sh
 db_name='my_app'
 db_user='my_app'
-db_pass='Pa$$word'
+db_pass='Pa$$w0rd'
 app_name='my_app_name'
 ```
 
