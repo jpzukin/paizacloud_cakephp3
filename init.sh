@@ -1,6 +1,6 @@
 #1/bin/sh
 
-$shell_dir=$(dirname $(readlink -f $0))
+shell_dir=$(dirname $(readlink -f $0))
 cd ${shell_dir}
 
 # Parameters
@@ -43,9 +43,22 @@ if [ ! -f database.sql ]; then
 	mysql -u root < database.sql
 fi
 
+# Setting a Apache httpd Module/conf:
+#   - rewrite module
+#   - fqdn module
+if [ ! -f /etc/apache2/conf-available/fqdn.conf ]; then
+	sudo sh <<-EOS
+		echo ServerName $(hostname).paiza-user.cloud > /etc/apache2/conf-available/fqdn.conf
+		a2enconf fqdn.conf
+		a2enmod rewrite
+		service apache2 restart-
+	EOS
+fi
+
 # Getting CakePHP
+cd ~/public_html
+
 if [ ! -d ${application_name} ]; then
-	cd ~/public_html
 	composer create-project --prefer-dist ${application_name} --no-progress --profile
 	sed -i -e "s/secret/${password}/" ${application_name}
 fi
