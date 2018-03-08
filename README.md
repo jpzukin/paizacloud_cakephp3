@@ -4,6 +4,7 @@ PaizaCloudでCakePHP3のチュートリアル環境を準備するスクリプ�
 
 [PaizaCloud](https://paiza.cloud/ja/)のサーバー限定です。
 
+
 ## 利用方法
 
 cloneしてinit.shを実行すると、約10分くらいで終了します。
@@ -31,4 +32,8 @@ app_name='my_app_name'
 べき等性などは考慮していません。
 
 CakePHP3のチュートリアルのための環境構築だけが目的です。
+
+## 変更履歴
+
+2018/3/8 - PaizaCloudのPHPのバージョンが7.2へ上がったことへの対応
 
