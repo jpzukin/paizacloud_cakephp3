@@ -17,10 +17,11 @@ app_name='my_app_name'
 #   - intl PHP Extention
 #   - zip PHP Extention
 pkg_list=""
-(dpkg -l php7.0-intl | grep ^ii) || pkg_list="${pkg_list} php7.0-intl"
-(dpkg -l php7.0-zip  | grep ^ii) || pkg_list="${pkg_list} php7.0-zip"
+(dpkg -l php7.2-intl | grep ^ii) || pkg_list="${pkg_list} php7.2-intl"
+(dpkg -l php7.2-zip  | grep ^ii) || pkg_list="${pkg_list} php7.2-zip"
 if [ "${pkg_list}" != "" ]; then
 	sudo sh <<-EOS
+		DEBIAN_FRONTEND=noninteractive
 		apt-get update
 		apt-get upgrade
 		apt-get install -y ${pkg_list}
