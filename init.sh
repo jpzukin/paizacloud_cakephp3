@@ -22,8 +22,8 @@ pkg_list=""
 if [ "${pkg_list}" != "" ]; then
 	sudo sh <<-EOS
 		DEBIAN_FRONTEND=noninteractive
-		apt-get update
-		apt-get upgrade
+		apt-get update -y
+		apt-get upgrade -y
 		apt-get install -y ${pkg_list}
 	EOS
 fi
